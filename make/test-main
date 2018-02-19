@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export PYTHONPATH=./src/python
+
+python3 test/test.py
+#python2 test/test.py

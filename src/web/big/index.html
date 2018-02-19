@@ -1,0 +1,72 @@
+<html>
+<head>
+    <title>Remote</title>
+    <link rel='icon' type='image/x-icon' href='../img/favicon.ico'/>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='apple-mobile-web-app-status-bar-style' content='black' />
+
+    <script src='../ext/JQuery-1.8.2/min.js'></script>
+    <link href='../ext/FontAwesome-5.0.6/css/fontawesome-all.min.css' rel='stylesheet'>
+
+    <script src='../js/devices.js'></script>
+    <script src='../js/buttons.js'></script>
+    <script src='js/pads.js'></script>
+    <script src='js/remotes.js'></script>
+
+    <script src='../js/StartStopOnceTimer.js'></script>
+    <script src='../js/RemoteBuilder.js'></script>
+    <script src='../js/MapSwitcher.js'></script>
+    <script src='../js/API.js'></script>
+    <script src='../js/ScreenSizer.js'></script>
+    <script src='../js/APIButtons.js'></script>
+
+    <link href='../css/screen.css' rel='stylesheet'>
+    <link href='css/screen.css' rel='stylesheet'>
+    <link href='../css/theme-light.css' rel='stylesheet'>
+<script>
+var currentRemote;
+$(document).ready(function(){
+    RemoteBuilder.init(remotes, pads, devices);
+    ScreenSizer.init($('main'), 4/3, 1/30);
+    MapSwitcher.init(remotes, function(remote){
+        $('header p').text(remote.name);
+        $('header i').removeClass();
+        $('header i').addClass('fa fa-' + remote.fa);
+		RemoteBuilder.createPadsMenu($('footer'), remote);
+		RemoteBuilder.createPad($('main'), remote, remote.pads[0]);
+        currentRemote = remote;
+    });
+    APIButtons.init($('body'), '.button', 150);
+    RemoteBuilder.createRemotesMenu($('nav ul'), remotes);
+
+	$('nav').on('click', function(){ $('nav').toggleClass('expanded'); });
+    $('nav').on('click', 'li', function(){ MapSwitcher.switchTo($(this).attr('remote')); });
+    $('#prev').on('click', function(){ MapSwitcher.previous(); });
+    $('#next').on('click', function(){ MapSwitcher.next(); });
+    $('footer').on('click', 'span', function(){
+        RemoteBuilder.createPad($('main'), currentRemote, pads[$(this).attr('pad')]);
+    });
+    $('nav').click();
+	$('nav li:first-child').click();
+	$('footer li:first-child').click();
+});
+</script>
+
+</head>
+<body class='row'>
+    <nav>
+        <span id='menu'><i class='fa fa-bars'></i></span>
+        <h1>Devices</h1>
+        <ul id='devices'></ul>
+    </nav>
+    <aside id='prev'></aside>
+    <div class='col'>
+        <header class='row'><i></i><p></p></header>
+        <main class='pad'></main>
+        <footer class='row'></footer>
+    </div>
+    <aside id='next'></aside>
+</body>
+</html>

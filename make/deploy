@@ -1,0 +1,11 @@
+#!/bin/bash
+
+server=10.0.0.14
+
+rsync -auv src/web/* root@$server:/var/www/
+rsync -auv src/python/* root@$server:/usr/lib/python2.7/
+rsync -auv src/etc/* root@$server:/etc/
+
+ssh root@$server "service remotepi restart"
+ssh root@$server "service lirc restart"
+ssh root@$server "service nginx restart"

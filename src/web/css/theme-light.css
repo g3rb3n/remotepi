@@ -1,0 +1,19 @@
+body, nav, main, header, footer {
+    background: white;
+    color: black;
+}
+header, footer, aside {
+    background: #eee;
+}
+.clickable:hover{
+    background: #ccc;
+    color: black;
+}
+.clickable.pressed {
+    background: black;
+    color: white;
+}
+.error {
+    background: red;
+    color: black;
+}

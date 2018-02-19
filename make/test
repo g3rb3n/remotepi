@@ -1,0 +1,6 @@
+#!/bin/bash
+
+export PYTHONPATH=./src/python
+
+nosetests3 test/test*.py
+#nosetests test/test*.py

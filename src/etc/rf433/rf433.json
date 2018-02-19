@@ -1,0 +1,15 @@
+{
+    "devices":{
+        "InterTechno":{
+            "brand":"InterTechno",
+            "keys":{
+                "a1off":20,
+                "a1on":21,
+                "a2off":4116,
+                "a2on":4117,
+                "a3off":16404,
+                "a3on":16405
+            }
+        }
+    }
+}

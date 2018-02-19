@@ -1,0 +1,23 @@
+{
+    "devices":{
+        "Kodi":{
+            "server":"10.0.0.12",
+            "username":"osmc",
+            "password":"qqqqqqqq",
+            "commands":{
+                "KEY_LEFT":"Input.Left",
+                "KEY_UP":"Input.Up",
+                "KEY_DOWN":"Input.Down",
+                "KEY_RIGHT":"Input.Right",
+                "KEY_OK":"Input.Select",
+                "KEY_MENU":"Input.ContextMenu",
+                "KEY_HOME":"Input.Home",
+                "KEY_BACK":"Input.Back",
+                "KEY_PLAY":"Player.PlayPause",
+                "KEY_PAUSE":"Player.PlayPause",
+                "KEY_STOP":"Player.Stop",
+                "KEY_OSD":"Input.ShowOSD"
+            }
+        }
+    }
+}

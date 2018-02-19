@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rm /etc/nginx/sites-enabled/default
+ln -s /etc/nginx/sites-available/multiapp.conf /etc/nginx/sites-enabled/multiapp.conf
+
+pip='pip  -i https://pypi.python.org/simple/ install'
+$pip -r /usr/lib/python3/dist-packages/remotepi/requirements.txt
+
+$pip flask
+$pip flask-cors

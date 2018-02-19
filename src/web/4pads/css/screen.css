@@ -1,0 +1,99 @@
+main > div,
+.pad {
+    flex: 1;
+}
+
+/* font sizes */
+header p,
+footer p {
+    font-size: 125%;
+}
+header .fa,
+footer .fa {
+    font-size: 100%;
+}
+.pad > div > span > .fa {
+    font-size: 125%;
+}
+.pad > div > span > b {
+    font-size: 200%;
+}
+.pad > div > span > p {
+    font-size: 125%;
+}
+nav > h1,
+nav > ul > li {
+    font-size: 150%;
+}
+nav > #menu {
+    font-size: 150%;
+}
+
+
+/* horizontal fill */
+aside {
+    flex-grow: 1;
+}
+
+/* vertical fill */
+header, footer {
+    flex-grow: 0.2;
+}
+main {
+    flex: 10;
+}
+
+/* header & footer */
+footer {
+    display: none;
+}
+header > .fa,
+footer > .fa {
+    line-height: 1.1;
+}
+header > i {
+    margin: auto 0.5ex;
+}
+header p {
+    flex: 3;
+    margin: auto;
+    text-align: center;
+}
+
+/* navigation */
+nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+nav {
+    visibility: hidden;
+}
+nav > #menu {
+    position: fixed;
+    top: 0;
+    margin: 1ex;
+    visibility: visible;
+}
+nav > h1,
+nav > ul {
+    margin: 0.25ex;
+}
+nav > ul > li > .fa {
+    width: 2ex;
+    line-height: 1.1;
+}
+nav > ul > li > * {
+    margin: 0.25ex;
+    vertical-align: middle;
+}
+nav.expanded {
+    visibility: visible;
+}
+nav.expanded > span {
+    position: fixed;
+    right: 0;
+}

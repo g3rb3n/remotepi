@@ -1,0 +1,36 @@
+/* reset */
+html, body, * {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* flex */
+.row,
+.pad > * {
+    display:flex;
+    flex-direction: row;
+}
+.col,
+.pad {
+    display:flex;
+    flex-direction: column;
+}
+.pad > div ,
+.pad > div > span {
+    flex: 1;
+}
+
+/* button */
+.button {
+    display: flex;
+    flex: 1;
+    border-radius: 1ex;
+    margin: 0.5ex;
+}
+.button > .fa,
+.button > b,
+.button > p {
+    margin: auto;
+    line-height: 1.1;
+}

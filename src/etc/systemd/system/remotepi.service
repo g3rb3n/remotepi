@@ -1,0 +1,13 @@
+[Unit]
+Description=RemotePi Universal Remote Control Service
+After=multi-user.target
+
+[Service]
+Type=idle
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=remotepi
+ExecStart=/usr/bin/python2.7 -m remotepi.server
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,18 @@
+body, nav, main, header, footer {
+    background: black;
+    color: white;
+}
+header, footer {
+    background: #111;
+}
+.hover {
+    border: 1px solid white;
+}
+.clicked {
+    background: white;
+    color: black;
+}
+.error {
+    background: red;
+    color: black;
+}
