@@ -10,6 +10,9 @@ logger.setLevel(logging.DEBUG)
 class RF433:
 
     lock = threading.Lock()
+    pin = 3
+    protocol = 7
+    repeat = 10
 
     def __init__(self, conf):
         with open(conf, 'r') as f:
@@ -28,6 +31,7 @@ class RF433:
         return str(self.config['devices'][device]['keys'][key])
 
     def call(self, cmd):
+        cmd = [str(e) for e in cmd]
         with self.lock:
             logger.info(' '.join(cmd))
             p = subprocess.Popen(
@@ -45,10 +49,10 @@ class RF433:
             return out
 
     def once(self, dev, cmd):
-        return self.call(['/home/pi/433Utils/RPi_utils/codesend', self.command(dev, cmd), '10', '7'])
+        return self.call(['RCSend', self.pin, self.protocol, self.repeat, self.command(dev, cmd)])
 
     def start(self, dev, cmd):
-        return self.call(['/home/pi/433Utils/RPi_utils/codesend', self.command(dev, cmd), '20', '7'])
+        return self.call(['RCSend', self.pin, self.protocol, self.repeat * 3, self.command(dev, cmd)])
 
     def stop(self, device_id, command):
         return
