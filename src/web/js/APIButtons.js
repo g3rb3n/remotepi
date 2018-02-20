@@ -33,10 +33,19 @@ var APIButtons = (function(){
     var down = function($button){
         $button.removeClass('error');
         $button.addClass('pressed');
+        var data = $button.data();
+        if (data.buttons){
+            data.buttons.forEach(function(button){
+                API.once(button.device, button.command, done, err, $button);
+            });
+            return;
+        }
         StartStopOnceTimer.down($button);
     }
 
     var up = function($button){
+        var data = $button.data();
+        if (data.buttons) return;
         StartStopOnceTimer.up($button);
     }
     return {

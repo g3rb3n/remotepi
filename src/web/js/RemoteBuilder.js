@@ -1,5 +1,10 @@
 var RemoteBuilder = (function(){
 
+    var clone = function(o){
+        return $.extend(true, {}, o);
+        //return JSON.parse(JSON.stringify(o));
+    }
+
     var mapIds = function(map){
         Object.keys(map).forEach(function(key){
             map[key].id = key;
@@ -12,20 +17,20 @@ var RemoteBuilder = (function(){
         mapIds(devices);
         Object.keys(remotes).forEach(function(key){
             var remote = remotes[key];
-            if (typeof remote.device === "string"){
+            if (typeof remote.device === 'string'){
                 if (!(remote.device in devices))
                     throw remote.device + ' not found in devices';
                 remote.device = devices[remote.device];
             }
-            if (typeof remote.pad === "string"){
+            if (typeof remote.pad === 'string'){
                 if (!(remote.pad in pads))
                     throw remote.pad + ' not found in pads';
-                remote.pad = pads[remote.pad];
+                remote.pad = clone(pads[remote.pad]);
             }
             if ('pads' in remote){
                 for (var i = 0 ; i < remote.pads.length ; ++i){
                     var pad = remote.pads[i];
-                    if (typeof pad === "string"){
+                    if (typeof pad === 'string'){
                         if (!(pad in pads))
                             throw pad + ' not found in pads';
                         remote.pads[i] = pads[pad];
@@ -39,11 +44,23 @@ var RemoteBuilder = (function(){
         keys.forEach(function(row){
             for (var idx = 0 ; idx < row.length ; ++idx){
                 var col = row[idx];
-                if (typeof col === "string"){
+                if (typeof col === 'string'){
                     row[idx] = {
                         command: 'KEY_' + col.toUpperCase(),
                         text: col
                     };
+                }
+            }
+        });
+    }
+
+    var resolveFunctionKeys = function(keys, remote){
+        keys.forEach(function(row){
+            for (var idx = 0 ; idx < row.length ; ++idx){
+                var col = row[idx];
+                if (typeof col === 'function'){
+                    console.log('fun')
+                    row[idx] = col(remote);
                 }
             }
         });
@@ -54,6 +71,7 @@ var RemoteBuilder = (function(){
             row.forEach(function(col){
                 if (!col) return;
                 col.enabled = deviceKeys.indexOf(col.command) > -1;
+                if (col.alwaysEnabled) col.enabled = true;
             });
         });
     }
@@ -66,6 +84,7 @@ var RemoteBuilder = (function(){
         var device = remote.device;
 
         resolveStringKeys(pad.keys);
+        resolveFunctionKeys(pad.keys, remote);
         if (device) enableKeys(pad.keys, device.keys);
 
         pad.keys.forEach(function(row){
@@ -77,10 +96,13 @@ var RemoteBuilder = (function(){
                     $span.attr('fill',true).appendTo($row);
                     return;
                 }
-                var deviceId = col.device ? col.device : device.id;
+                var deviceId =
+                    col.device ? col.device :
+                    device ? device.id : null;
                 $span.addClass('button')
                     .addClass('clickable')
                     .attr('device', deviceId);
+                $span.data(col);
                 if ('fa' in col){
                     var $i = $('<i>')
                         .addClass('fa fa-' + col.fa)

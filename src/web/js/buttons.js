@@ -20,6 +20,57 @@ var mapped = function(key, str){
     }
 }
 
+var displayPower = {
+    fa: 'power-off',
+    command: 'POWER',
+    device: 'Sony_RM-ED035',
+    alwaysEnabled: true
+}
+
+var displaySelect = {
+    fa: 'tv',
+    command: 'INPUT',
+    device: 'Sony_RM-ED035',
+    alwaysEnabled: true
+}
+
+var audioPower = {
+    fa: 'power-off',
+    command: 'POWER',
+    device: 'JVC_AXR337',
+    alwaysEnabled: true
+}
+
+var audioSelect = function(remote){
+    var command = null;
+    if (remote.device.id == 'Sony_RM-ED035') command = 'VIDEO';
+    if (remote.device.id == 'SONY_RMT-D175P') command = 'VIDEO';
+    if (remote.device.id == 'Arris_VIP2952V2') command = 'VIDEO';
+    if (remote.device.id == 'Kodi') command = 'VIDEO';
+
+    if (!command) return null;
+    return {
+        fa: 'music',
+        command: command,
+        device: 'JVC_AXR337',
+        alwaysEnabled: true
+    }
+}
+
+var audioVolumneUp = {
+    fa: 'volume-up',
+    command: 'KEY_VOLUMEUP',
+    device: 'JVC_AXR337',
+    alwaysEnabled: true
+}
+
+var audioVolumneDown = {
+    fa: 'volume-down',
+    command: 'KEY_VOLUMEDOWN',
+    device: 'JVC_AXR337',
+    alwaysEnabled: true
+}
+
 var play = fa('play');
 var pause = fa('pause');
 var stop = fa('stop');
@@ -71,3 +122,20 @@ var b2_on = fa('b2on', 'toggle-on', null, 'InterTechno');
 var b2_off = fa('b2off', 'toggle-off', null, 'InterTechno');
 var b3_on = fa('b3on', 'toggle-on', null, 'InterTechno');
 var b3_off = fa('b3off', 'toggle-off', null, 'InterTechno');
+
+var lightsOff = {
+    fa: 'toggle-off',
+    buttons:[
+        a1_off,
+        a2_off,
+        a3_off
+    ]
+};
+var lightsOn = {
+    fa: 'toggle-on',
+    buttons:[
+        a1_on,
+        a2_on,
+        a3_on
+    ]
+};

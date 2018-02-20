@@ -34,5 +34,10 @@ var remotes = {
         device: 'InterTechno',
         fa: 'lightbulb',
         pad: 'lights'
+    },
+    'macro':{
+        name: 'Macros',
+        fa: 'lightbulb',
+        pad: 'macros'
     }
 }
