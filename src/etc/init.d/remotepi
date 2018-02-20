@@ -1,0 +1,65 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:        remotepi
+# Required-Start:  $network
+# Required-Stop:   $network
+# Default-Start:   2 3 4 5
+# Default-Stop:    0 1 6
+# Short-Description: Start python remote daemon
+### END INIT INFO
+
+PROJECT='remotepi'
+FOLDER='remotepi'
+HOME="/var/lib/$PROJECT"
+USER=root
+SCRIPT="python -m ${PROJECT}/server"
+LOG="/var/log/${PROJECT}.log"
+ERR="/var/log/${PROJECT}.err"
+
+function start {
+	is_running=`pgrep -f "$SCRIPT" | wc -l`
+	if [[ $is_running -eq "0" ]]; then
+		sudo -u $USER $SCRIPT 1> $LOG 2> $ERR &
+	fi
+}
+
+function stop {
+	kill `pgrep -f "$SCRIPT"`
+
+	if [ "$?" -eq 0 ]; then
+		echo "Success stopping $PROJECT"
+	else
+		echo "Error stopping $PROJECT"
+	fi
+}
+
+function restart {
+	stop && sleep 2 && start
+
+	if [ "$?" -eq 0 ]; then
+		echo "Success reloading $PROJECT"
+	else
+		echo "Error reloading $PROJECT"
+	fi
+}
+
+case "$1" in
+	start)
+		echo "Starting $PROJECT..."
+		start
+		;;
+	stop)
+		echo "Stopping $PROJECT..."
+		stop
+		;;
+	restart)
+		echo "Restarting $PROJECT..."
+		restart
+		;;
+	*)
+		echo "Usage: service $PROJECT {start|stop|restart}"
+		exit 1
+	;;
+esac
+
+exit 0
