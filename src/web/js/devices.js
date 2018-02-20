@@ -128,7 +128,6 @@ var devices = {
         keys:[
             'KEY_POWER',
             'KEY_EJECTCD',
-            'KEY_MUTE',
 
             'KEY_LEFT',
             'KEY_RIGHT',
@@ -157,12 +156,7 @@ var devices = {
             'KEY_7',
             'KEY_8',
             'KEY_9',
-            'KEY_0',
-
-            'KEY_RED',
-            'KEY_GREEN',
-            'KEY_YELLOW',
-            'KEY_BLUE'
+            'KEY_0'
         ]
     },
     'InterTechno':{
