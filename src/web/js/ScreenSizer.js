@@ -10,23 +10,22 @@ var ScreenSizer = (function(){
     }
 
     var size = function($node, ratio){
-        var w = Math.max(screen.width || 0, window.innerWidth || 0);
-        var h = Math.max(screen.height || 0, window.innerHeight || 0);
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        if (!w || !h) return;
         var nw = h / ratio;
         var nh = w * ratio;
         if (nw > w) nw = w;
         if (nh > h) nh = h;
         $node.css('height', nh);
         $node.css('width', nw);
-        var m = Math.min(nw,nh);
-        var fs = (m / 60) + 'pt';
-        $('body').css('font-size',fs);
         console.log('(' + w + ',' + h + ') (' + nw + ',' + nh + ')');
     }
 
     var fontSize = function($node, ratio, factor){
-        var w = Math.max(screen.width || 0, window.innerWidth || 0);
-        var h = Math.max(screen.height || 0, window.innerHeight || 0);
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+        if (!w || !h) return;
         var nw = h / ratio;
         var nh = w * ratio;
         if (nw > w) nw = w;
