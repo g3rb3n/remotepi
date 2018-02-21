@@ -6,6 +6,7 @@ apt-get -y install nginx
 apt-get install lirc
 apt-get -y install git
 
+git clone git://git.drogon.net/wiringPi
 git clone https://github.com/g3rb3n/rc-switch.git
 cd rc-switch
 make
