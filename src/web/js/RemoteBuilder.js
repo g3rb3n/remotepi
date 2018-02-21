@@ -33,7 +33,7 @@ var RemoteBuilder = (function(){
                     if (typeof pad === 'string'){
                         if (!(pad in pads))
                             throw pad + ' not found in pads';
-                        remote.pads[i] = pads[pad];
+                        remote.pads[i] = clone(pads[pad]);
                     }
                 };
             }
@@ -59,17 +59,22 @@ var RemoteBuilder = (function(){
             for (var idx = 0 ; idx < row.length ; ++idx){
                 var col = row[idx];
                 if (typeof col === 'function'){
-                    console.log('fun')
                     row[idx] = col(remote);
                 }
             }
         });
     }
 
-    var enableKeys = function(padKeys, deviceKeys){
+    var enableKeys = function(pad, device){
+        var deviceKeys = device.keys;
+        var padKeys = pad.keys;
         padKeys.forEach(function(row){
             row.forEach(function(col){
                 if (!col) return;
+                if (typeof col.enabledFunction === 'function'){
+                    col.enabled = col.enabledFunction(device);
+                    return;
+                }
                 col.enabled = deviceKeys.indexOf(col.command) > -1;
                 if (col.alwaysEnabled) col.enabled = true;
             });
@@ -85,7 +90,7 @@ var RemoteBuilder = (function(){
 
         resolveStringKeys(pad.keys);
         resolveFunctionKeys(pad.keys, remote);
-        if (device) enableKeys(pad.keys, device.keys);
+        if (device) enableKeys(pad, device);
 
         pad.keys.forEach(function(row){
             var $row = $('<div>').appendTo($target);
@@ -159,7 +164,6 @@ var RemoteBuilder = (function(){
         init: init,
         createPad: createPad,
         createRemotesMenu: createRemotesMenu,
-        createPadsMenu: createPadsMenu,
-        enableKeys: enableKeys
+        createPadsMenu: createPadsMenu
     }
 })();

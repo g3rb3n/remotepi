@@ -20,25 +20,25 @@ var mapped = function(key, str){
     }
 }
 
-var displayPower = {
-    fa: 'power-off',
-    command: 'POWER',
-    device: 'Sony_RM-ED035',
-    alwaysEnabled: true
+function enabledOn(devices){
+    return function(device){
+        console.log(device.id);
+        return devices.indexOf(device.id) > -1;
+    }
 }
 
 var displaySelect = {
     fa: 'tv',
     command: 'INPUT',
     device: 'Sony_RM-ED035',
-    alwaysEnabled: true
+    enabledFunction: enabledOn(['SONY_RMT-D175P', 'Arris_VIP2952V2', 'Kodi'])
 }
 
-var audioPower = {
+var displayPower = {
     fa: 'power-off',
-    command: 'POWER',
-    device: 'JVC_AXR337',
-    alwaysEnabled: true
+    command: 'KEY_POWER',
+    device: 'Sony_RM-ED035',
+    enabledFunction: enabledOn(['SONY_RMT-D175P', 'Arris_VIP2952V2', 'Kodi'])
 }
 
 var audioSelect = function(remote){
@@ -53,22 +53,29 @@ var audioSelect = function(remote){
         fa: 'music',
         command: command,
         device: 'JVC_AXR337',
-        alwaysEnabled: true
+        enabledFunction: enabledOn(['Sony_RM-ED035', 'SONY_RMT-D175P', 'Arris_VIP2952V2', 'Kodi'])
     }
+}
+
+var audioPower = {
+    fa: 'power-off',
+    command: 'KEY_POWER',
+    device: 'JVC_AXR337',
+    enabledFunction: enabledOn(['Sony_RM-ED035', 'SONY_RMT-D175P', 'Arris_VIP2952V2', 'Kodi'])
 }
 
 var audioVolumneUp = {
     fa: 'volume-up',
     command: 'KEY_VOLUMEUP',
     device: 'JVC_AXR337',
-    alwaysEnabled: true
+    enabledFunction: enabledOn(['Sony_RM-ED035', 'SONY_RMT-D175P', 'Arris_VIP2952V2', 'Kodi'])
 }
 
 var audioVolumneDown = {
     fa: 'volume-down',
     command: 'KEY_VOLUMEDOWN',
     device: 'JVC_AXR337',
-    alwaysEnabled: true
+    enabledFunction: enabledOn(['Sony_RM-ED035', 'SONY_RMT-D175P', 'Arris_VIP2952V2', 'Kodi'])
 }
 
 var play = fa('play');
