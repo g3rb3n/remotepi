@@ -2,3 +2,17 @@
 
 apt-get -y install python3 pythonpip3
 apt-get -y install nginx
+
+apt-get install lirc
+apt-get -y install git
+
+git clone https://github.com/g3rb3n/rc-switch.git
+cd rc-switch
+make
+make install
+cd -
+
+echo "lirc_dev
+lirc_rpi gpio_in_pin=17 gpio_out_pin=18" >> /etc/modules
+
+echo "dtoverlay=lirc-rpi,gpio_in_pin=17,gpio_out_pin=18" >> /boot/config.txt

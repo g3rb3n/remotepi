@@ -29,12 +29,16 @@ Raspberry Pi hat with:
 - js/devices.js defines the capabilities of the devices
 - js/remotes.js defines the different remotes
 
+## UI support
+Tested on:
+- Firefox 58.0
+- Crhome 64.0
+
 ## ToDo
-- remotepi init.d script
 - Better Lirc config parsing support, include name xxx as keys for raw encoding
-- Support MQTT
 - Use device definitions from server
 - Use the uncommon keys that a device supports
+- Support MQTT
 - Find a way to easily record ir / rf codes from the ui
 - ESP8266 as server
 - More layout examples
