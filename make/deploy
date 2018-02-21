@@ -1,6 +1,6 @@
 #!/bin/bash
 
-server=10.0.0.14
+server=remote.lan
 
 rsync -auv src/web/* root@$server:/var/www/
 rsync -auv src/python/* root@$server:/usr/lib/python2.7/

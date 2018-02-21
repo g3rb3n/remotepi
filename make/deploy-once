@@ -1,6 +1,6 @@
 #!/bin/bash
 
-server=10.0.0.14
+server=remote.lan
 
 ssh root@$server "chmod 644 /etc/systemd/system/remotepi.service"
 ssh root@$server "systemctl enable remotepi.service"
