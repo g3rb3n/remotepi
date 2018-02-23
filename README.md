@@ -32,7 +32,7 @@ Raspberry Pi hat with:
 ## UI support
 Tested on:
 - Firefox 58.0
-- Crhome 64.0
+- Chrome 64.0
 
 ## ToDo
 - Better Lirc config parsing support, include name xxx as keys for raw encoding
