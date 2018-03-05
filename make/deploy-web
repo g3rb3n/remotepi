@@ -1,0 +1,5 @@
+#!/bin/bash
+
+server=remote.lan
+
+rsync -auv src/web/* root@$server:/var/www/
