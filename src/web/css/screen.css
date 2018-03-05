@@ -4,7 +4,9 @@ html, body, * {
     padding: 0;
     overflow: hidden;
 }
-
+body, nav, main, header, footer {
+    cursor: pointer;
+}
 body {
     width: 100%;
     height: 100%;
