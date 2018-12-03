@@ -22,7 +22,6 @@ var mapped = function(key, str){
 
 function enabledOn(devices){
     return function(device){
-        console.log(device.id);
         return devices.indexOf(device.id) > -1;
     }
 }
@@ -42,10 +41,12 @@ var displayPower = {
 }
 
 var audioSelect = function(remote){
+    console.log('audioSelect')
+    console.log(remote)
     var command = null;
-    if (remote.device.id == 'Sony_RM-ED035') command = 'VIDEO';
-    if (remote.device.id == 'SONY_RMT-D175P') command = 'VIDEO';
-    if (remote.device.id == 'Arris_VIP2952V2') command = 'VIDEO';
+    if (remote.device.id == 'Sony_RM-ED035') command = 'CD';
+    if (remote.device.id == 'SONY_RMT-D175P') command = 'CD';
+    if (remote.device.id == 'Arris_VIP2952V2') command = 'TUNER';
     if (remote.device.id == 'Kodi') command = 'VIDEO';
 
     if (!command) return null;
