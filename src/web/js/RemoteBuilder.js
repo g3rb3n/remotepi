@@ -85,10 +85,15 @@ var RemoteBuilder = (function(){
     };
 
     var createPad = function($target, remote, pad){
+        console.log('createPad');
+        console.log($target)
+        console.log(remote)
+        console.log(pad)
         $target.empty();
 
         if (!pad) pad = remote.pad;
         if (!pad) return;
+        pad = clone(pad);
         var device = remote.device;
 
         resolveStringKeys(pad.keys);
